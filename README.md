@@ -98,3 +98,53 @@ Your code will talk to the database via 4 methods:
 ## Contributing
 
 This repository is the starter code for *all* Udacity students. Therefore, we most likely will not accept pull requests. For details, check out [CONTRIBUTING.md](https://github.com/udacity/reactnd-project-would-you-rather-starter/blob/master/CONTRIBUTING.md).
+
+## Project planning
+
+1. Identify What Each View Should Look Like
+2. Hierarchy of Components
+3. What Events Happen in the App
+4. What Data Lives in the Store
+
+### Identify What Each View Should Look Like
+
+#### Signin
+
+This view displaying authUsers to signin as.
+
+![signin](planning/images/views/01-signin.jpg)
+
+Signin View Requirements:
+
+#### Home
+
+This view displaying a list of questions.
+
+![home](planning/images/views/02-home.jpg)
+
+Home View Requirements:
+
+#### Question
+
+This view displaying a question.
+
+![question](planning/images/views/03-question.jpg)
+![question](planning/images/views/03-question-answered.jpg)
+
+Question View Requirements:
+
+#### New question
+
+This view displaying a new question form.
+
+![new-question](planning/images/views/04-new-question.jpg)
+
+New Question View Requirements:
+
+#### Leaderboard
+
+This view displaying list of authUsers with scoring.
+
+![leaderboard](planning/images/views/05-leaderboard.jpg)
+
+Leaderboard View Requirements:
