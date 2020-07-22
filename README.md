@@ -150,6 +150,7 @@ The view displaying a question: unanswered
 
 Question View Requirement (unanswered)
 
+- located at the route (/questions/:question_id)
 - Text “Would You Rather”;
 - Avatar image of the AuthUser who posted the polling question
 - Two options (radio buttons)
@@ -162,6 +163,10 @@ The view displaying a question: (answered)
 Question View Requirements:
 
 - located at the route (/questions/:question_id)
+- the text of the option
+- the number of people who voted for that option
+- the percentage of people who voted for that option
+- the option the logged in authUser voted for (your vote)
 
 #### New question
 
@@ -172,6 +177,14 @@ The view to create a new question.
 New Question View Requirements:
 
 - located at the route (/add)
+- includes text: complete the question
+- includes text: Would you rather ...
+- Two text fields with text in between: Or
+  - First with placeholder text: Enter option one text here
+  - Second with placeholder text: Enter option two text here
+- Submit button
+- Upon submitting the form, a new poll is created and the user is taken to the home page.
+
 
 #### Leaderboard
 
@@ -182,3 +195,9 @@ This view displays a list of authUsers with a scoring system.
 Leaderboard View Requirements:
 
 - located at the route (/leaderboard)
+- Each entry on the leaderboard contains the following:
+  - the user’s name;
+  - the user’s picture;
+  - the number of questions the user asked; and
+  - the number of questions the user answered.
+  - Users are ordered in descending order based on the sum of the number of questions they’ve answered and the number of questions they’ve asked.
