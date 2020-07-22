@@ -185,7 +185,6 @@ New Question View Requirements:
 - Submit button
 - Upon submitting the form, a new poll is created and the user is taken to the home page.
 
-
 #### Leaderboard
 
 This view displays a list of authUsers with a scoring system.
@@ -201,3 +200,64 @@ Leaderboard View Requirements:
   - the number of questions the user asked; and
   - the number of questions the user answered.
   - Users are ordered in descending order based on the sum of the number of questions they’ve answered and the number of questions they’ve asked.
+
+### Hierarchy of components for each view
+
+#### Login View
+
+![signin](planning/images/components/01-signin.jpg)
+
+- **App** - the overall container for the project
+- **Navigation** - displays the navigation
+- **SignIn** - displays a form to select a authUser and enter the app
+
+#### Home View
+
+![home](planning/images/components/02-home.jpg)
+
+- **App** - the overall container for the project
+- **Navigation** - displays the navigation
+- **Question List**
+  - responsible for the entire list of questions
+  - sorted by date and answered/unanswered
+- **Question** - shows a tease/part of the the question, user and a way to see the full question
+
+#### Question View
+
+![question](planning/images/components/03-question.jpg)
+![question](planning/images/components/03-question-answered.jpg)
+
+- **App** - the overall container for the project
+- **Navigation** - displays the navigation
+- **Question Detail** - displays the content for a single question. The question can be answered or unanswered.
+
+#### Create Question View
+
+![new-question](planning/images/components/04-new-question.jpg)
+
+- **App** - the overall container for the project
+- **Navigation** - displays the navigation
+- **Create Question** - display the form to create a new question
+
+#### Leaderboard View
+
+![leaderboard](planning/images/components/05-leaderboard.jpg)
+
+- **App** - the overall container for the project
+- **Navigation** - displays the navigation
+- **Leaderboard** - displays a list of users and ordered them by score.
+- **User Stats** - displays the statistics of a user (answered/created question).
+
+#### All Components
+
+The application will have the following components:
+
+- App
+- Navigation
+- SignIn
+- Question List
+- Question
+- Question Detail
+- Create Question
+- Leaderboard
+- User Stats
