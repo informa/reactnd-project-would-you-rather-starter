@@ -261,3 +261,94 @@ The application will have the following components:
 - Create Question
 - Leaderboard
 - User Stats
+
+
+### What Events Happen in the App
+
+#### SignIn Component
+
+![signin](planning/images/events/01-signin.jpg)
+
+For the Signin component we need a list of users and by selecting a user with will set the user and authedUser and navigate to the Question list component.
+
+#### Question List Component
+
+![question-list](planning/images/events/02-home.jpg)
+
+- we'll need to get a list of all of the questions. So for this component, we just need to: `_getQuestions()`
+- We get the authedUser (user that is currently logged in) so we can sort the questions by the ones they have answered and those they have not.
+
+So the action type for event this will probably be something like **GET_LIST_OF_QUESTIONS** or **GET_DATA**.
+
+
+#### Question Component
+
+![question](planning/images/events/02-home-question.jpg)
+
+- We get a particular question from a list of questions.
+- We get the author of the specific question as we need the author name and avatar image
+
+
+#### Question Detail Component
+
+- We get a specific Question from a list of questions.
+- We get the answer to a specific question from a list of questions.
+- We get the author of the specific question as we need the author name and avatar image
+
+If there is no answer from the authedUser
+
+![question-detail](planning/images/events/03-question.jpg)
+
+  - they can answer the question.
+  - answering the question will use the method `_saveQuestionAnswer`
+  - once the answer is saved the screen will show the results 
+
+
+If there is an answer from the authedUser
+
+![question-detail](planning/images/events/03-question-answered.jpg)
+
+- then they can see their chosen answer and the number of people who voted for both options and the percentage of people who voted for the options is shown
+- we will need all the users data so we can collect the answers from the other users and tally a percentage.
+
+```
+users = {
+  sarahedo: {
+    answers: {
+      "8xf0y6ziyjabvozdd253nd": "optionOne",
+      "6ni6ok3ym7mf1p33lnez": "optionOne",
+    },
+  },
+  tylermcginnis: {
+    answers: {
+      vthrdm985a262al8qx3do: "optionOne",
+      xj352vofupe1dqz9emx13r: "optionTwo",
+    },
+  }
+}
+```
+
+
+#### Create Question Component
+
+![create-question](planning/images/events/04-new-question.jpg)
+
+- We get the authedUser so the user can create a new question.
+- We set the text options of the new question.
+- We need to call the `_saveQuestion` method here.
+
+
+#### Leaderboard Component
+
+![leaderboard](planning/images/events/05-leaderboard.jpg)
+
+- We need to get the list of users for this component.
+- We need to sort the list of users by the sum of answer questions and questions created
+
+
+#### User Stats Component
+
+![user-stats](planning/images/events/05-user-stats.jpg)
+
+- As we are sorting the list users in the Leaderboard component, we can just pass the specific information 
+(name, answered questions, created questions and total) to this User stats component.
