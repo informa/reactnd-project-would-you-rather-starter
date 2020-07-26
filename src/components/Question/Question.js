@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import styles from "./Question.module.css";
+import { formatDate } from "../../utils/helper";
 
 class Question extends React.Component {
   render() {
     const { avatarURL, name } = this.props.user;
-    const { optionOne, optionTwo } = this.props.question;
+    const { optionOne, optionTwo, dateTime } = this.props.question;
     return (
       <div className={styles.question}>
         <h3 className={styles.title}>{name}</h3>
@@ -15,6 +16,7 @@ class Question extends React.Component {
           </div>
           <div className={styles.details}>
             <h3>Would you rather</h3>
+            <p>{dateTime}</p>
             <ul>
               <li>{optionOne}</li>
               <li>{optionTwo}</li>
@@ -32,10 +34,12 @@ const mapStateToProps = ({ questions, users }, { id }) => {
   const author = question.author;
   const userAuthor = users[author];
 
+  // Todo: refactor this into helper function like formatQuestion in Data.js
   return {
     question: {
       optionOne: question.optionOne.text,
       optionTwo: question.optionTwo.text,
+      dateTime: formatDate(question.timestamp),
     },
     user: {
       name: userAuthor.name,
