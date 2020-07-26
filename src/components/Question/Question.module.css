@@ -1,0 +1,41 @@
+.question {
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 1px 2px 0 rgba(46, 62, 79, 0.1);
+  background: white;
+}
+
+.container {
+  display: flex;
+}
+
+.details {
+  padding-left: 16px;
+  flex: 1;
+}
+
+.title {
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e8eaec;
+}
+
+.avatar {
+  margin: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+  overflow: hidden;
+  background-color: aqua;
+}
+
+.avatar img {
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 700px) {
+  .avatar {
+    width: 100px;
+    height: 100px;
+  }
+}
