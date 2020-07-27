@@ -3,6 +3,13 @@ import { connect } from "react-redux";
 import styles from "./Question.module.css";
 import { formatDate } from "../../utils/helper";
 
+
+// TODO: 
+// refactor map state to prop into helper function like formatQuestion in Data.js ?
+// styles: 
+//  date time?, 
+//  show 15 chars of question one ...become a superh...?
+
 class Question extends React.Component {
   render() {
     const { avatarURL, name } = this.props.user;
@@ -34,7 +41,6 @@ const mapStateToProps = ({ questions, users }, { id }) => {
   const author = question.author;
   const userAuthor = users[author];
 
-  // Todo: refactor this into helper function like formatQuestion in Data.js
   return {
     question: {
       optionOne: question.optionOne.text,
