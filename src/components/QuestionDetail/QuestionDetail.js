@@ -3,11 +3,10 @@ import { connect } from "react-redux";
 import styles from "./QuestionDetail.module.css";
 import { formatDate } from "../../utils/helper";
 
-
-// TODO: 
+// TODO:
 // refactor map state to prop into helper function like formatQuestion in Data.js ?
-// styles: 
-//  question and answered states, 
+// styles:
+//  question and answered states,
 // ACTION: handleVote - submit question form
 
 class QuestionDetail extends React.Component {
