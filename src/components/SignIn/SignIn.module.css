@@ -1,4 +1,4 @@
-.list {
+/* .list {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -12,11 +12,11 @@
   display: flex;
   background-color: #fff;
   align-items: center;
-  padding:8px;
+  padding: 8px;
 }
 
 .link:hover {
-  background-color: #F3F4F5;
+  background-color: #f3f4f5;
 }
 
 .name {
@@ -35,4 +35,130 @@
 .avatar img {
   width: 100%;
   height: auto;
+} */
+
+.avatar {
+  margin: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 100px;
+  overflow: hidden;
+  background-color: aqua;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+}
+
+.name {
+  flex: 1;
+  padding-left: 8px;
+}
+
+.container {
+  position: relative;
+}
+
+.value {
+  position: relative;
+  z-index: 1;
+}
+
+.value::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: calc(50% - 9px);
+  right: 19px;
+  width: 11px;
+  height: 11px;
+  transform: rotate(45deg);
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  pointer-events: none;
+}
+
+.input {
+  display: block;
+  height: 36px;
+  width: 100%;
+  padding: 0 16px;
+  background: #fff;
+  border: 1px solid transparent;
+  box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+  outline: none;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 14px;
+  text-align: left;
+  text-overflow: ellipsis;
+  line-height: 36px;
+  -webkit-appearance: none;
+}
+
+.input:hover {
+  border-color: #2fcc8b;
+}
+
+.select {
+  background: #fff;
+  box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.15);
+
+  position: absolute;
+  z-index: 2;
+  top: 44px;
+  right: 0;
+  left: 0;
+  border-radius: 3px;
+  overflow: auto;
+  max-height: 360px;
+}
+
+.options {
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.option {
+  width: 100%;
+  background: #fff;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 12px;
+}
+
+.option:not(.is-selected):hover {
+  background: rgba(47, 204, 139, 0.1);
+}
+
+.group {
+}
+
+.group-header {
+}
+
+.is-selected {
+  background: #2fcc8b;
+  color: #fff;
+}
+
+.is-selected:hover {
+  background: #2eb378;
+  color: #fff;
+}
+
+.is-highlighted {
+  background: rgba(47, 204, 139, 0.1);
+}
+
+.is-loading {
+}
+
+.has-focus {
 }

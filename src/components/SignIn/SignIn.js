@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import styles from "./SignIn.module.css";
+import SelectSearch from "react-select-search";
 
 // TODO:
 // Setup action
@@ -17,42 +18,54 @@ class SignIn extends React.Component {
     // Then router to QuestionList
   };
 
+  renderFriend = (props, option, snapshot, className) => {
+    return (
+      <button {...props} className={className} type="button">
+        <span className={styles.avatar}>
+          <img
+            alt={option.name}
+            width="32"
+            height="32"
+            src={option.avatarURL}
+            className={styles.image}
+          />
+        </span>
+        <span className={styles.name}>{option.name}</span>
+      </button>
+    );
+  };
+
   render() {
     return (
       <div>
         <h1>SignIn</h1>
-
-        <ul className={styles.list}>
-          {Object.keys(this.props.users).map((user) => {
-            const { name, avatarURL, id } = this.props.users[user];
-            return (
-              <li className={styles.item} key={id}>
-                <a
-                  className={styles.link}
-                  href="#"
-                  title={name}
-                  name={id}
-                  onClick={this.handleClick}
-                >
-                  <span className={styles.avatar}>
-                    <img src={avatarURL} alt={name} />
-                  </span>
-                  <span className={styles.name}>{name}</span>
-                </a>
-              </li>
-            );
-          })}
-        </ul>
+        <SelectSearch
+          options={this.props.userOptions}
+          renderOption={this.renderFriend}
+          name="language"
+          value={this.props.authedUser}
+          placeholder="Select user"
+          // printOptions="always"
+          className={(key) => styles[key]}
+        />
       </div>
     );
   }
 }
 
 const mapStateToProps = ({ users, authedUser }) => {
-  const user = users[authedUser];
+  const userOptions = Object.keys(users).map((user) => {
+    const { name, avatarURL, id } = users[user];
+    return {
+      name,
+      avatarURL,
+      value: id,
+    };
+  });
 
   return {
-    users,
+    authedUser,
+    userOptions,
   };
 };
 
