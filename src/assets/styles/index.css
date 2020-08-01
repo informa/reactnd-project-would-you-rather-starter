@@ -28,7 +28,9 @@ h4,
 h5,
 h6,
 p,
-ul {
+ul,
+.field,
+.card {
   margin: 0 0 16px 0;
 }
 

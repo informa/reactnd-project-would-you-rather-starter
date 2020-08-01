@@ -3,11 +3,10 @@ import { connect } from "react-redux";
 import styles from "./Question.module.css";
 import { formatDate } from "../../utils/helper";
 
-
-// TODO: 
+// TODO:
 // refactor map state to prop into helper function like formatQuestion in Data.js ?
-// styles: 
-//  date time?, 
+// styles:
+//  date time?,
 //  show 15 chars of question one ...become a superh...?
 
 class Question extends React.Component {
@@ -15,8 +14,10 @@ class Question extends React.Component {
     const { avatarURL, name } = this.props.user;
     const { optionOne, optionTwo, dateTime } = this.props.question;
     return (
-      <div className={styles.question}>
-        <h3 className={styles.title}>{name}</h3>
+      <div className="card">
+        <div className="card__header">
+          <h3>{name}</h3>
+        </div>
         <div className={styles.container}>
           <div className={styles.avatar}>
             <img src={avatarURL} alt={name} />
@@ -28,8 +29,10 @@ class Question extends React.Component {
               <li>{optionOne}</li>
               <li>{optionTwo}</li>
             </ul>
-            <button className="button">View poll</button>
           </div>
+        </div>
+        <div className="card__footer">
+          <button className="button">View poll</button>
         </div>
       </div>
     );

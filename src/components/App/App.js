@@ -5,6 +5,7 @@ import LoadingBar from "react-redux-loading";
 import QuestionList from "../QuestionList/QuestionList";
 import QuestionDetail from "../QuestionDetail/QuestionDetail";
 import SignIn from "../SignIn/SignIn";
+import CreateQuestion from "../CreateQuestion/CreateQuestion";
 
 import styles from "./App.module.css";
 import "../../assets/styles/App.css";
@@ -23,7 +24,11 @@ class App extends React.Component {
     return (
       <div className={styles.page}>
         <LoadingBar />
-        {this.props.loading === true ? null : <SignIn />}
+        {this.props.loading === true ? null : (
+          <div>
+            <CreateQuestion />
+          </div>
+        )}
       </div>
     );
   }

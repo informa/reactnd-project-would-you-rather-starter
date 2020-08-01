@@ -2,63 +2,81 @@ import React from "react";
 import { connect } from "react-redux";
 import styles from "./SignIn.module.css";
 import SelectSearch from "react-select-search";
+import { setAuthedUser } from "../../actions/authedUser";
 
 // TODO:
-// Setup action
 // Setup routing
-// Styling, selectable option
+// Styling page cleanup
 
 class SignIn extends React.Component {
-  handleClick = (event) => {
-    event.preventDefault();
-    const userId = event.target.name;
-    console.log(userId);
+  state = {
+    value: this.props.authedUser,
+  };
 
-    // Action set setAuthedUser with the id
-    // Then router to QuestionList
+  handleChange = (value) => {
+    this.setState(() => ({
+      value,
+    }));
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+    this.props.dispatch(setAuthedUser(this.state.value));
   };
 
   renderFriend = (props, option, snapshot, className) => {
+    const { image, name } = option;
     return (
       <button {...props} className={className} type="button">
         <span className={styles.avatar}>
           <img
-            alt={option.name}
+            alt={name}
             width="32"
             height="32"
-            src={option.avatarURL}
+            src={image}
             className={styles.image}
           />
         </span>
-        <span className={styles.name}>{option.name}</span>
+        <span className={styles.name}>{name}</span>
       </button>
     );
   };
 
   render() {
+    const { authedUser, userOptions } = this.props;
     return (
-      <div>
-        <h1>SignIn</h1>
+      <form className="card" onSubmit={this.handleSubmit}>
+        <div className="card__header">
+          <h2>SignIn ({authedUser})</h2>
+        </div>
         <SelectSearch
-          options={this.props.userOptions}
+          options={userOptions}
           renderOption={this.renderFriend}
-          name="language"
-          value={this.props.authedUser}
+          name="Sign in user"
+          value={authedUser}
           placeholder="Select user"
           // printOptions="always"
           className={(key) => styles[key]}
+          onChange={this.handleChange}
         />
-      </div>
+        <div className="card__footer">
+          <button type="submit" className="button">
+            Sign in
+          </button>
+        </div>
+      </form>
     );
   }
 }
 
 const mapStateToProps = ({ users, authedUser }) => {
+  // Create array of users to send to SelectSearch component
   const userOptions = Object.keys(users).map((user) => {
     const { name, avatarURL, id } = users[user];
     return {
       name,
-      avatarURL,
+      image: avatarURL,
       value: id,
     };
   });
