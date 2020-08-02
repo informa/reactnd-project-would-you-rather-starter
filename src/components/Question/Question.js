@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import styles from "./Question.module.css";
 import { formatDate } from "../../utils/helper";
 
@@ -10,6 +11,11 @@ import { formatDate } from "../../utils/helper";
 //  show 15 chars of question one ...become a superh...?
 
 class Question extends React.Component {
+  handleClick = () => {
+    const { id, history } = this.props;
+
+    history.push(`/question/${id}`);
+  };
   render() {
     const { avatarURL, name } = this.props.user;
     const { optionOne, optionTwo, dateTime } = this.props.question;
@@ -32,7 +38,9 @@ class Question extends React.Component {
           </div>
         </div>
         <div className="card__footer">
-          <button className="button">View poll</button>
+          <button className="button" onClick={this.handleClick}>
+            View poll
+          </button>
         </div>
       </div>
     );
@@ -57,4 +65,4 @@ const mapStateToProps = ({ questions, users }, { id }) => {
   };
 };
 
-export default connect(mapStateToProps)(Question);
+export default withRouter(connect(mapStateToProps)(Question));

@@ -1,0 +1,68 @@
+.nav {
+  background-color: #fff;
+  margin-bottom: 32px;
+  border-bottom: 1px solid hotpink;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list {
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.list li:not(:first-child) {
+  margin-left: 18px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+  border-bottom: 2px solid transparent;
+  height: 48px;
+}
+
+.active,
+.link:hover {
+  border-bottom-color: hotpink;
+}
+
+.active {
+  font-weight: bold;
+}
+
+.user:hover {
+  border-bottom-color: transparent;
+}
+
+.name {
+  display: none;
+}
+
+.avatar {
+  margin: 0;
+  width: 25px;
+  height: 25px;
+  border-radius: 100px;
+  overflow: hidden;
+  background-color: aqua;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 700px) {
+  .name {
+    display: block;
+    margin-left: 10px;
+  }
+}

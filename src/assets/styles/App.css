@@ -1,3 +1,9 @@
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
 /* Card */
 .card {
   border-radius: 8px;
@@ -29,8 +35,6 @@
   margin-right: 12px;
 }
 
-
-
 /* Buttons */
 .button {
   background-image: linear-gradient(-180deg, #00bc6f 0%, #00aa65 100%);
@@ -45,6 +49,19 @@
   white-space: nowrap;
 }
 
+.button--secondary {
+  color: #2e3e4f;
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    from(#f3f3f3),
+    to(#ffffff)
+  );
+  background-image: linear-gradient(0deg, #f3f3f3 0%, #ffffff 100%);
+  border: 1px solid #c5c9ce;
+}
+
 .button:hover:not([disabled]) {
   border-color: #326752;
   background-image: -webkit-gradient(
@@ -57,6 +74,12 @@
   background-image: linear-gradient(-180deg, #00bc6f 0%, #0d9c52 100%);
   -webkit-box-shadow: 0 2px 4px 0 rgba(0, 133, 80, 0.25);
   box-shadow: 0 2px 4px 0 rgba(0, 133, 80, 0.25);
+}
+
+.button--secondary:hover:not([disabled]) {
+  border-color: #969ea7;
+  background-image: linear-gradient(0deg, #ebeef1 0%, #fff 97%);
+  box-shadow: 0 2px 4px 0 rgba(46, 62, 79, 0.08);
 }
 
 .button:focus {
@@ -97,11 +120,10 @@
 }
 /* Inputs End */
 
-
 /**
  * Main wrapper
  */
- /* .select-search {
+/* .select-search {
   width: 300px;
   position: relative;
   font-family: 'Nunito Sans', sans-serif;

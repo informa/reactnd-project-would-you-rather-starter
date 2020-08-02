@@ -1,11 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
+import { BrowserRouter, Route } from "react-router-dom";
 import { handleInitialData } from "../../actions/shared";
 import LoadingBar from "react-redux-loading";
 import QuestionList from "../QuestionList/QuestionList";
 import QuestionDetail from "../QuestionDetail/QuestionDetail";
 import SignIn from "../SignIn/SignIn";
 import CreateQuestion from "../CreateQuestion/CreateQuestion";
+import Leaderboard from "../Leaderboard/Leaderboard";
+import Nav from "../Nav/Nav";
 
 import styles from "./App.module.css";
 import "../../assets/styles/App.css";
@@ -22,14 +25,23 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className={styles.page}>
-        <LoadingBar />
-        {this.props.loading === true ? null : (
-          <div>
-            <CreateQuestion />
-          </div>
-        )}
-      </div>
+      <BrowserRouter>
+        <>
+          <LoadingBar />
+          {this.props.loading === true ? null : (
+            <>
+              <Nav />
+              <div className="page">
+                <Route path="/" exact component={QuestionList} />
+                <Route path="/question/:id" component={QuestionDetail} />
+                <Route path="/new" component={CreateQuestion} />
+                <Route path="/leaderboard" component={Leaderboard} />
+                <Route path="/signin" component={SignIn} />
+              </div>
+            </>
+          )}
+        </>
+      </BrowserRouter>
     );
   }
 }
