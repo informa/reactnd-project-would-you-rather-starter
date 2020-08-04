@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import styles from "./CreateQuestion.module.css";
+import PageTemplate from "../PageTemplate/PageTemplate";
 
 // TODO:
 
@@ -53,31 +54,37 @@ class CreateQuestion extends React.Component {
     const fieldsHaveValues = allFieldValues.every(this.hasValue);
 
     return (
-      <form className="card" onSubmit={this.handleSubmit}>
-        <div className="card__header">
-          <h2>Create new question</h2>
-        </div>
-        <h3>Would you rather ...</h3>
-        <Input
-          id="optionOne"
-          label="Enter text for option one"
-          onChange={this.handleOnChandle}
-        />
-        <h4>Or</h4>
-        <Input
-          id="optionTwo"
-          label="Enter text for option two"
-          onChange={this.handleOnChandle}
-        />
-        <div className="card__footer">
-          <button className="button button--secondary" type="button">
-            Cancel
-          </button>
-          <button className="button" type="submit" disabled={!fieldsHaveValues}>
-            Submit
-          </button>
-        </div>
-      </form>
+      <PageTemplate pageTitle="Create Question">
+        <form className="card" onSubmit={this.handleSubmit}>
+          <div className="card__header">
+            <h2>Create new question</h2>
+          </div>
+          <h3>Would you rather ...</h3>
+          <Input
+            id="optionOne"
+            label="Enter text for option one"
+            onChange={this.handleOnChandle}
+          />
+          <h4>Or</h4>
+          <Input
+            id="optionTwo"
+            label="Enter text for option two"
+            onChange={this.handleOnChandle}
+          />
+          <div className="card__footer">
+            <button className="button button--secondary" type="button">
+              Cancel
+            </button>
+            <button
+              className="button"
+              type="submit"
+              disabled={!fieldsHaveValues}
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </PageTemplate>
     );
   }
 }

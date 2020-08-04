@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import styles from "./QuestionDetail.module.css";
 import { formatDate } from "../../utils/helper";
+import PageTemplate from "../PageTemplate/PageTemplate";
+import { handleSaveQuestionAnswer } from "../../actions/questions";
 
 // TODO:
 // refactor map state to prop into helper function like formatQuestion in Data.js ?
@@ -10,6 +12,25 @@ import { formatDate } from "../../utils/helper";
 // ACTION: handleVote - submit question form
 
 class QuestionDetail extends React.Component {
+  state = {
+    value: "",
+  };
+
+  handleChange = (event) => {
+    const answer = event.target.id;
+    const { id } = this.props.match.params;
+    const { dispatch, authedUser } = this.props;
+
+    // Don't do it here
+    dispatch(
+      handleSaveQuestionAnswer({
+        authedUser,
+        qid: id,
+        answer,
+      })
+    );
+  };
+
   renderQuestion = () => {
     const { options } = this.props.question;
     return (
@@ -25,6 +46,7 @@ class QuestionDetail extends React.Component {
                 id={option}
                 name="woud-you-rather"
                 value={text}
+                onChange={this.handleChange}
               />
               <label htmlFor={option}>{text}</label>
             </div>
@@ -69,29 +91,28 @@ class QuestionDetail extends React.Component {
 
   render() {
     const { avatarURL, name } = this.props.user;
-    const { totalNumberOfVotes } = this.props.question;
-    console.log(this.props);
+    const { authedUserVoted } = this.props.question;
     return (
-      <div className="card">
-        <div className="card__header">
-          <h3>{name}</h3>
-        </div>
-        <div className={styles.container}>
-          <div className={styles.avatar}>
-            <img src={avatarURL} alt={name} />
+      <PageTemplate>
+        <div className="card">
+          <div className="card__header">
+            <h3>{name}</h3>
           </div>
-          <div className={styles.details}>
-            {totalNumberOfVotes > 0
-              ? this.renderResults()
-              : this.renderQuestion()}
+          <div className={styles.container}>
+            <div className={styles.avatar}>
+              <img src={avatarURL} alt={name} />
+            </div>
+            <div className={styles.details}>
+              {authedUserVoted ? this.renderResults() : this.renderQuestion()}
+            </div>
           </div>
         </div>
-      </div>
+      </PageTemplate>
     );
   }
 }
 
-const mapStateToProps = ({ questions, users }, props) => {
+const mapStateToProps = ({ questions, users, authedUser }, props) => {
   const { id } = props.match.params;
   const question = questions[id];
   const author = question.author;
@@ -103,6 +124,13 @@ const mapStateToProps = ({ questions, users }, props) => {
     (numberOfOptionOneVotes / totalNumberOfVotes) * 100;
   const percentageOfOptionTwoVotes =
     (numberOfOptionTwoVotes / totalNumberOfVotes) * 100;
+  const authedUserVotedOptionOne = question.optionOne.votes.includes(
+    authedUser
+  );
+  const authedUserVotedOptionTwo = question.optionTwo.votes.includes(
+    authedUser
+  );
+  const authedUserVoted = authedUserVotedOptionOne || authedUserVotedOptionTwo;
 
   return {
     question: {
@@ -111,22 +139,24 @@ const mapStateToProps = ({ questions, users }, props) => {
           text: question.optionOne.text,
           numberOfVotes: numberOfOptionOneVotes,
           percentageOfVotes: percentageOfOptionOneVotes.toFixed(),
-          authedUserVoted: question.optionOne.votes.includes(author),
+          authedUserVoted: authedUserVotedOptionOne,
         },
         optionTwo: {
           text: question.optionTwo.text,
           numberOfVotes: numberOfOptionTwoVotes,
           percentageOfVotes: percentageOfOptionTwoVotes.toFixed(),
-          authedUserVoted: question.optionTwo.votes.includes(author),
+          authedUserVoted: authedUserVotedOptionTwo,
         },
       },
       totalNumberOfVotes: totalNumberOfVotes,
+      authedUserVoted,
       dateTime: formatDate(question.timestamp),
     },
     user: {
       name: userAuthor.name,
       avatarURL: userAuthor.avatarURL,
     },
+    authedUser,
   };
 };
 

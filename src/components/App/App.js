@@ -9,7 +9,6 @@ import SignIn from "../SignIn/SignIn";
 import CreateQuestion from "../CreateQuestion/CreateQuestion";
 import Leaderboard from "../Leaderboard/Leaderboard";
 import Nav from "../Nav/Nav";
-
 import styles from "./App.module.css";
 import "../../assets/styles/App.css";
 
@@ -29,16 +28,16 @@ class App extends React.Component {
         <>
           <LoadingBar />
           {this.props.loading === true ? null : (
-            <>
+            <div className={styles.page}>
               <Nav />
-              <div className="page">
+              <div className={styles.container}>
                 <Route path="/" exact component={QuestionList} />
                 <Route path="/question/:id" component={QuestionDetail} />
                 <Route path="/new" component={CreateQuestion} />
                 <Route path="/leaderboard" component={Leaderboard} />
                 <Route path="/signin" component={SignIn} />
               </div>
-            </>
+            </div>
           )}
         </>
       </BrowserRouter>

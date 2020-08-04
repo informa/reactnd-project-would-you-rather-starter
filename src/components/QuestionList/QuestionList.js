@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Question from "../Question/Question";
 import styles from "./QuestionList.module.css";
+import PageTemplate from "../PageTemplate/PageTemplate";
 
 // TODO:
 // refactor sorting function as it is used twice ?
@@ -24,8 +25,7 @@ class QuestionList extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>Home (user: {this.props.authedUserName})</h1>
+      <PageTemplate pageTitle={`Home (user: ${this.props.authedUserName})`}>
         <ul>
           <li>
             <a
@@ -68,7 +68,7 @@ class QuestionList extends React.Component {
             ))}
           </ul>
         )}
-      </div>
+      </PageTemplate>
     );
   }
 }

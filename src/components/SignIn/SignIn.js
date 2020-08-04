@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import styles from "./SignIn.module.css";
 import SelectSearch from "react-select-search";
 import { setAuthedUser } from "../../actions/authedUser";
+import PageTemplate from "../PageTemplate/PageTemplate";
 
 // TODO:
 // Setup routing
@@ -46,26 +47,28 @@ class SignIn extends React.Component {
   render() {
     const { authedUser, userOptions } = this.props;
     return (
-      <form className="card" onSubmit={this.handleSubmit}>
-        <div className="card__header">
-          <h2>SignIn ({authedUser})</h2>
-        </div>
-        <SelectSearch
-          options={userOptions}
-          renderOption={this.renderFriend}
-          name="Sign in user"
-          value={authedUser}
-          placeholder="Select user"
-          // printOptions="always"
-          className={(key) => styles[key]}
-          onChange={this.handleChange}
-        />
-        <div className="card__footer">
-          <button type="submit" className="button">
-            Sign in
-          </button>
-        </div>
-      </form>
+      <PageTemplate pageTitle="Sign in">
+        <form className="card" onSubmit={this.handleSubmit}>
+          <div className="card__header">
+            <h2>SignIn ({authedUser})</h2>
+          </div>
+          <SelectSearch
+            options={userOptions}
+            renderOption={this.renderFriend}
+            name="Sign in user"
+            value={authedUser}
+            placeholder="Select user"
+            // printOptions="always"
+            className={(key) => styles[key]}
+            onChange={this.handleChange}
+          />
+          <div className="card__footer">
+            <button type="submit" className="button">
+              Sign in
+            </button>
+          </div>
+        </form>
+      </PageTemplate>
     );
   }
 }

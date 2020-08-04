@@ -10,7 +10,7 @@ class Nav extends React.Component {
   render() {
     return (
       <nav className={styles.nav}>
-        <div className={`page ${styles.container}`}>
+        <div className={styles.container}>
           <ul className={styles.list}>
             <li>
               <NavLink
@@ -76,8 +76,6 @@ class Nav extends React.Component {
 
 const mapStateToProps = ({ users, authedUser }) => {
   const user = users[authedUser];
-
-  console.log(authedUser);
 
   return {
     name: user.name,

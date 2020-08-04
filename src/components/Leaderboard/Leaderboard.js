@@ -2,16 +2,15 @@ import React from "react";
 import { connect } from "react-redux";
 import UserStats from "../UserStats/UserStats";
 import styles from "./Leaderboard.module.css";
+import PageTemplate from "../PageTemplate/PageTemplate";
 
 // TODO:
 // style the tabs
 
 class Leaderboard extends React.Component {
   render() {
-    console.log(this.props.userIds);
     return (
-      <div>
-        <h1>Leaderboard</h1>
+      <PageTemplate pageTitle="Leaderboard">
         <ul className={styles.list}>
           {this.props.usersWithScores.map((user) => (
             <li className={styles.item} key={user.id}>
@@ -19,7 +18,7 @@ class Leaderboard extends React.Component {
             </li>
           ))}
         </ul>
-      </div>
+      </PageTemplate>
     );
   }
 }
