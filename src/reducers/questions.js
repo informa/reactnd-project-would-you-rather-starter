@@ -8,9 +8,16 @@ const questions = (state = {}, action) => {
         ...action.questions,
       };
     case SAVE_QUESTION_ANSWER:
-      console.log('state ', state, 'action ', action);
+      const { qid, authedUser, answer } = action;
       return {
         ...state,
+        [qid]: {
+          ...state[qid],
+          [answer]: {
+            ...state[qid][answer],
+            votes: state[qid][answer].votes.concat([authedUser]),
+          },
+        },
       };
     default:
       return state;

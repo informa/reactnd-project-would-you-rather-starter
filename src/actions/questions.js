@@ -10,23 +10,11 @@ export const receiveQuestions = (questions) => {
   };
 };
 
-const saveQuestionAnswer = ({ authedUser, id, answer }) => {
+export const saveQuestionAnswer = ({ authedUser, qid, answer }) => {
   return {
     type: SAVE_QUESTION_ANSWER,
     authedUser,
-    id,
+    qid,
     answer,
   };
 };
-
-export function handleSaveQuestionAnswer(info) {
-  return (dispatch) => {
-    dispatch(saveQuestionAnswer(info));
-
-    return _saveQuestionAnswer(info).catch((e) => {
-      console.warn("Error in handlesaveQuestionAnswer: ", e);
-      // dispatch(saveQuestionAnswer(info));
-      alert("The was an error answering the question. Try again.");
-    });
-  };
-}

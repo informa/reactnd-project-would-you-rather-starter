@@ -1,6 +1,7 @@
 import { getInitialData } from "../utils/api";
-import { receiveQuestions } from "./questions";
-import { receiveUsers } from "./users";
+import { _saveQuestionAnswer } from "../utils/_DATA";
+import { receiveQuestions, saveQuestionAnswer } from "./questions";
+import { receiveUsers, saveUserAnswer } from "./users";
 import { setAuthedUser } from "../actions/authedUser";
 import { showLoading, hideLoading } from "react-redux-loading";
 
@@ -18,3 +19,15 @@ export const handleInitialData = () => {
     });
   };
 };
+
+export function handleSaveQuestionAnswer(info) {
+  return (dispatch) => {
+    dispatch(showLoading());
+
+    return _saveQuestionAnswer(info).then(() => {
+      dispatch(saveQuestionAnswer(info));
+      dispatch(saveUserAnswer(info));
+      dispatch(hideLoading());
+    });
+  };
+}

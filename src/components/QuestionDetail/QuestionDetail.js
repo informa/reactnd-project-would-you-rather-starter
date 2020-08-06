@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import styles from "./QuestionDetail.module.css";
 import { formatDate } from "../../utils/helper";
 import PageTemplate from "../PageTemplate/PageTemplate";
-import { handleSaveQuestionAnswer } from "../../actions/questions";
+import { handleSaveQuestionAnswer } from "../../actions/shared";
 
 // TODO:
 // refactor map state to prop into helper function like formatQuestion in Data.js ?
