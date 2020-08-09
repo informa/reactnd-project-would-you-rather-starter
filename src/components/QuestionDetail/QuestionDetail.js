@@ -7,26 +7,31 @@ import { handleSaveQuestionAnswer } from "../../actions/shared";
 
 // TODO:
 // refactor map state to prop into helper function like formatQuestion in Data.js ?
-// styles:
-//  question and answered states,
-// ACTION: handleVote - submit question form
+// styles
 
 class QuestionDetail extends React.Component {
   state = {
-    value: "",
+    answer: "",
   };
 
   handleChange = (event) => {
     const answer = event.target.id;
+
+    this.setState({
+      answer,
+    });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
     const { id } = this.props.match.params;
     const { dispatch, authedUser } = this.props;
 
-    // Don't do it here
     dispatch(
       handleSaveQuestionAnswer({
         authedUser,
         qid: id,
-        answer,
+        answer: this.state.answer,
       })
     );
   };
@@ -34,7 +39,7 @@ class QuestionDetail extends React.Component {
   renderQuestion = () => {
     const { options } = this.props.question;
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <h3>Would you rather ...</h3>
         {Object.keys(options).map((option) => {
           const { text } = options[option];
@@ -52,7 +57,11 @@ class QuestionDetail extends React.Component {
             </div>
           );
         })}
-        <button type="submit" className="button">
+        <button
+          type="submit"
+          className="button"
+          disabled={this.state.answer === "" ? true : false}
+        >
           Submit
         </button>
       </form>

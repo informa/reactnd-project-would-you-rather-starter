@@ -5,8 +5,7 @@ import { receiveUsers, saveUserAnswer } from "./users";
 import { setAuthedUser } from "../actions/authedUser";
 import { showLoading, hideLoading } from "react-redux-loading";
 
-//TODO: replace hard coded authed_id with signin step
-const AUTHED_ID = "sarahedo";
+// Signed in use is set to null to begin with
 
 export const handleInitialData = () => {
   return (dispatch) => {
@@ -14,7 +13,7 @@ export const handleInitialData = () => {
     return getInitialData().then(({ questions, users }) => {
       dispatch(receiveQuestions(questions));
       dispatch(receiveUsers(users));
-      dispatch(setAuthedUser(AUTHED_ID));
+      dispatch(setAuthedUser(null));
       dispatch(hideLoading());
     });
   };

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import { handleInitialData } from "../../actions/shared";
 import LoadingBar from "react-redux-loading";
 import QuestionList from "../QuestionList/QuestionList";
@@ -12,11 +12,6 @@ import Nav from "../Nav/Nav";
 import styles from "./App.module.css";
 import "../../assets/styles/App.css";
 
-// TODO:
-// Home : <QuestionList />
-// QuestionDetail : <QuestionDetail match={{ params: { id: "6ni6ok3ym7mf1p33lnez" } }} />
-// SignIn : <SignIn />
-
 class App extends React.Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData());
@@ -27,18 +22,25 @@ class App extends React.Component {
       <BrowserRouter>
         <>
           <LoadingBar />
-          {this.props.loading === true ? null : (
-            <div className={styles.page}>
-              <Nav />
-              <div className={styles.container}>
-                <Route path="/" exact component={QuestionList} />
-                <Route path="/question/:id" component={QuestionDetail} />
-                <Route path="/new" component={CreateQuestion} />
-                <Route path="/leaderboard" component={Leaderboard} />
-                <Route path="/signin" component={SignIn} />
-              </div>
+          <div className={styles.page}>
+            <Nav />
+            <div className={styles.container}>
+              {this.props.loading === true ? (
+                <>
+                  <Route path="/" render={() => <Redirect to="/signin" />} />
+                  <Route path="/signin" component={SignIn} />
+                </>
+              ) : (
+                <>
+                  <Route path="/" exact component={QuestionList} />
+                  <Route path="/question/:id" component={QuestionDetail} />
+                  <Route path="/new" component={CreateQuestion} />
+                  <Route path="/leaderboard" component={Leaderboard} />
+                  <Route path="/signin" component={SignIn} />
+                </>
+              )}
             </div>
-          )}
+          </div>
         </>
       </BrowserRouter>
     );

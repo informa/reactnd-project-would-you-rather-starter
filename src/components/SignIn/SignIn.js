@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import styles from "./SignIn.module.css";
 import SelectSearch from "react-select-search";
 import { setAuthedUser } from "../../actions/authedUser";
@@ -11,7 +12,7 @@ import PageTemplate from "../PageTemplate/PageTemplate";
 
 class SignIn extends React.Component {
   state = {
-    value: this.props.authedUser,
+    value: "",
   };
 
   handleChange = (value) => {
@@ -22,8 +23,10 @@ class SignIn extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const { id, history } = this.props;
 
     this.props.dispatch(setAuthedUser(this.state.value));
+    history.push(`/`);
   };
 
   renderFriend = (props, option, snapshot, className) => {
@@ -44,26 +47,35 @@ class SignIn extends React.Component {
     );
   };
 
+  pageTitle = (
+    <div>
+      <h1>Sign in</h1>
+      <p>You must signin to view the Would You Rather app.</p>
+    </div>
+  );
+
   render() {
-    const { authedUser, userOptions } = this.props;
+    const { userOptions } = this.props;
     return (
-      <PageTemplate pageTitle="Sign in">
+      <PageTemplate pageTitle={this.pageTitle}>
         <form className="card" onSubmit={this.handleSubmit}>
           <div className="card__header">
-            <h2>SignIn ({authedUser})</h2>
+            <strong>Sign in with one of the these users.</strong>
           </div>
           <SelectSearch
             options={userOptions}
             renderOption={this.renderFriend}
             name="Sign in user"
-            value={authedUser}
             placeholder="Select user"
-            // printOptions="always"
             className={(key) => styles[key]}
             onChange={this.handleChange}
           />
           <div className="card__footer">
-            <button type="submit" className="button">
+            <button
+              type="submit"
+              className="button"
+              disabled={this.state.value === "" ? true : false}
+            >
               Sign in
             </button>
           </div>
@@ -73,7 +85,7 @@ class SignIn extends React.Component {
   }
 }
 
-const mapStateToProps = ({ users, authedUser }) => {
+const mapStateToProps = ({ users }) => {
   // Create array of users to send to SelectSearch component
   const userOptions = Object.keys(users).map((user) => {
     const { name, avatarURL, id } = users[user];
@@ -85,7 +97,6 @@ const mapStateToProps = ({ users, authedUser }) => {
   });
 
   return {
-    authedUser,
     userOptions,
   };
 };

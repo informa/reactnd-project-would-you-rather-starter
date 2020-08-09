@@ -25,7 +25,7 @@ class QuestionList extends React.Component {
 
   render() {
     return (
-      <PageTemplate pageTitle={`Home (user: ${this.props.authedUserName})`}>
+      <PageTemplate pageTitle="Would You Rather?">
         <ul>
           <li>
             <a
@@ -82,7 +82,6 @@ const mapStateToProps = ({ questions, users, authedUser }) => {
   );
 
   return {
-    authedUserName: user.name,
     answered: answeredQuestions.sort(
       (a, b) => questions[b].timestamp - questions[a].timestamp
     ),
