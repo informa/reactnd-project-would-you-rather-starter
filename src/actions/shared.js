@@ -1,11 +1,15 @@
 import { getInitialData } from "../utils/api";
-import { _saveQuestionAnswer } from "../utils/_DATA";
-import { receiveQuestions, saveQuestionAnswer } from "./questions";
-import { receiveUsers, saveUserAnswer } from "./users";
+import { _saveQuestionAnswer, _saveQuestion } from "../utils/_DATA";
+import {
+  receiveQuestions,
+  saveQuestionAnswer,
+  saveQuestion,
+} from "./questions";
+import { receiveUsers, saveUserAnswer, saveUserQuestion } from "./users";
 import { setAuthedUser } from "../actions/authedUser";
 import { showLoading, hideLoading } from "react-redux-loading";
 
-// Signed in use is set to null to begin with
+// Signed in user is set to null to begin with.
 
 export const handleInitialData = () => {
   return (dispatch) => {
@@ -26,6 +30,18 @@ export function handleSaveQuestionAnswer(info) {
     return _saveQuestionAnswer(info).then(() => {
       dispatch(saveQuestionAnswer(info));
       dispatch(saveUserAnswer(info));
+      dispatch(hideLoading());
+    });
+  };
+}
+
+export function handleNewQuestion(question) {
+  return (dispatch) => {
+    dispatch(showLoading());
+
+    return _saveQuestion(question).then((formattedQuestion) => {
+      dispatch(saveQuestion(formattedQuestion));
+      dispatch(saveUserQuestion(formattedQuestion));
       dispatch(hideLoading());
     });
   };

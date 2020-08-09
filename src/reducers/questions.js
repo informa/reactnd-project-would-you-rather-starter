@@ -1,4 +1,8 @@
-import { RECEIVE_QUESTIONS, SAVE_QUESTION_ANSWER } from "../actions/questions";
+import {
+  RECEIVE_QUESTIONS,
+  SAVE_QUESTION_ANSWER,
+  SAVE_QUESTION,
+} from "../actions/questions";
 
 const questions = (state = {}, action) => {
   switch (action.type) {
@@ -18,6 +22,12 @@ const questions = (state = {}, action) => {
             votes: state[qid][answer].votes.concat([authedUser]),
           },
         },
+      };
+    case SAVE_QUESTION:
+      const newQuestion = action.formattedQuestion;
+      return {
+        ...state,
+        [newQuestion.id]: newQuestion,
       };
     default:
       return state;

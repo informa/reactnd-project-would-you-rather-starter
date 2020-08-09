@@ -27,3 +27,30 @@
     height: 100px;
   }
 }
+
+.score {
+  position: relative;
+}
+
+.bar {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  height: 30px;
+  display: flex;
+  overflow: hidden;
+}
+
+.percentage {
+  background-color: hotpink;
+}
+
+.label {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  left: 0;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

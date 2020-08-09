@@ -86,9 +86,19 @@ class QuestionDetail extends React.Component {
               <li key={option}>
                 <div>{text}</div>
                 <div>
-                  {numberOfVotes} of {totalNumberOfVotes} ({percentageOfVotes}
-                  %)
+                  {numberOfVotes} of {totalNumberOfVotes}
                   {authedUserVoted && <strong>Your vote</strong>}
+                </div>
+                <div className={styles.score}>
+                  <span className={styles.bar}>
+                    <span
+                      className={styles.percentage}
+                      style={{
+                        flexBasis: `${percentageOfVotes}%`,
+                      }}
+                    />
+                  </span>
+                  <span className={styles.label}>{percentageOfVotes}%</span>
                 </div>
               </li>
             );

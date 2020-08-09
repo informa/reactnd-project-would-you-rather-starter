@@ -1,7 +1,6 @@
-import { _saveQuestionAnswer } from "../utils/_DATA";
-
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
 export const SAVE_QUESTION_ANSWER = "SAVE_QUESTION_ANSWER";
+export const SAVE_QUESTION = "SAVE_QUESTION";
 
 export const receiveQuestions = (questions) => {
   return {
@@ -16,5 +15,12 @@ export const saveQuestionAnswer = ({ authedUser, qid, answer }) => {
     authedUser,
     qid,
     answer,
+  };
+};
+
+export const saveQuestion = (formattedQuestion) => {
+  return {
+    type: SAVE_QUESTION,
+    formattedQuestion,
   };
 };
