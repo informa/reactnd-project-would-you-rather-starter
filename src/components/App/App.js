@@ -21,7 +21,7 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <>
-          <LoadingBar />
+          <LoadingBar style={{ backgroundColor: 'royalBlue' }} />
           <div className={styles.page}>
             <Nav />
             <div className={styles.container}>

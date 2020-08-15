@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Question from "../Question/Question";
 import styles from "./QuestionList.module.css";
 import PageTemplate from "../PageTemplate/PageTemplate";
+import Card from "../Card/Card";
 
 // TODO:
 // refactor sorting function as it is used twice ?
@@ -26,21 +27,29 @@ class QuestionList extends React.Component {
   render() {
     return (
       <PageTemplate pageTitle="Would You Rather?">
-        <ul>
-          <li>
+        <ul className={styles.tabs}>
+          <li className={styles.tabitem}>
             <a
               name="answered questions"
-              className={!this.state.showUnanswered ? styles.active : null}
+              className={
+                !this.state.showUnanswered
+                  ? `${styles.active} ${styles.tablink}`
+                  : styles.tablink
+              }
               onClick={this.handleClick}
               href="answered-questions"
             >
               Answered Questions
             </a>
           </li>
-          <li>
+          <li className={styles.tabitem}>
             <a
               name="unanswered questions"
-              className={this.state.showUnanswered ? styles.active : null}
+              className={
+                this.state.showUnanswered
+                  ? `${styles.active} ${styles.tablink}`
+                  : styles.tablink
+              }
               onClick={this.handleClick}
               href="unanswered-questions"
             >
@@ -51,11 +60,28 @@ class QuestionList extends React.Component {
 
         {this.state.showUnanswered && (
           <ul className={styles.list}>
-            {this.props.unanswered.map((id) => (
-              <li className={styles.item} key={id}>
-                <Question id={id} />
+            {this.props.unanswered.length > 0 ? (
+              this.props.unanswered.map((id) => (
+                <li className={styles.item} key={id}>
+                  <Question id={id} />
+                </li>
+              ))
+            ) : (
+              <li>
+                <Card header="Awesome...">
+                  <p>
+                    you have ansered all the question, why not create a new one?
+                  </p>
+                  <Card.Footer>
+                    <button
+                      className="button"
+                    >
+                      Create new Question
+                    </button>
+                  </Card.Footer>
+                </Card>
               </li>
-            ))}
+            )}
           </ul>
         )}
 

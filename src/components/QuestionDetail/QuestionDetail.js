@@ -4,6 +4,8 @@ import styles from "./QuestionDetail.module.css";
 import { formatDate } from "../../utils/helper";
 import PageTemplate from "../PageTemplate/PageTemplate";
 import { handleSaveQuestionAnswer } from "../../actions/shared";
+import Avatar from "../Avatar/Avatar";
+import Card from "../Card/Card";
 
 // TODO:
 // refactor map state to prop into helper function like formatQuestion in Data.js ?
@@ -36,96 +38,115 @@ class QuestionDetail extends React.Component {
     );
   };
 
+  renderAvatar = () => {
+    const { name, backgroundColor, avatarURL } = this.props.user;
+
+    return (
+      <Avatar
+        name={name}
+        size="100px"
+        image={avatarURL}
+        backgroundColor={backgroundColor}
+      />
+    );
+  };
+
   renderQuestion = () => {
     const { options } = this.props.question;
+
+    const renderOptions = Object.keys(options).map((option) => {
+      const { text } = options[option];
+
+      return (
+        <div key={option}>
+          <input
+            type="radio"
+            id={option}
+            name="woud-you-rather"
+            value={text}
+            onChange={this.handleChange}
+          />
+          <label htmlFor={option}>{text}</label>
+        </div>
+      );
+    });
+
     return (
       <form onSubmit={this.handleSubmit}>
-        <h3>Would you rather ...</h3>
-        {Object.keys(options).map((option) => {
-          const { text } = options[option];
-
-          return (
-            <div key={option}>
-              <input
-                type="radio"
-                id={option}
-                name="woud-you-rather"
-                value={text}
-                onChange={this.handleChange}
-              />
-              <label htmlFor={option}>{text}</label>
-            </div>
-          );
-        })}
-        <button
-          type="submit"
-          className="button"
-          disabled={this.state.answer === "" ? true : false}
-        >
-          Submit
-        </button>
+        <Card.Body avatar={this.renderAvatar()}>
+          <div className={styles.details}>
+            <h3>Would you rather ...</h3>
+            {renderOptions}
+          </div>
+        </Card.Body>
+        <Card.Footer>
+          <button
+            type="submit"
+            className="button"
+            disabled={this.state.answer === "" ? true : false}
+          >
+            Submit
+          </button>
+        </Card.Footer>
       </form>
     );
   };
 
   renderResults = () => {
     const { options, totalNumberOfVotes } = this.props.question;
-    return (
-      <div>
-        <h3>Results</h3>
-        <ul>
-          {Object.keys(options).map((option) => {
-            const {
-              numberOfVotes,
-              percentageOfVotes,
-              authedUserVoted,
-              text,
-            } = options[option];
 
-            return (
-              <li key={option}>
-                <div>{text}</div>
-                <div>
-                  {numberOfVotes} of {totalNumberOfVotes}
-                  {authedUserVoted && <strong>Your vote</strong>}
-                </div>
-                <div className={styles.score}>
-                  <span className={styles.bar}>
-                    <span
-                      className={styles.percentage}
-                      style={{
-                        flexBasis: `${percentageOfVotes}%`,
-                      }}
-                    />
-                  </span>
-                  <span className={styles.label}>{percentageOfVotes}%</span>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+    return (
+      <Card.Body avatar={this.renderAvatar()}>
+        <div className={styles.details}>
+          <h3>Results</h3>
+          <ul class={styles.results}>
+            {Object.keys(options).map((option) => {
+              const {
+                numberOfVotes,
+                percentageOfVotes,
+                authedUserVoted,
+                text,
+              } = options[option];
+
+              return (
+                <li key={option}>
+                  <p className={styles.answer}>
+                    <span>{text}:</span>
+                    {authedUserVoted && (
+                      <strong className={styles.uservote}>Your vote</strong>
+                    )}
+                  </p>
+                  <div className={styles.score}>
+                    <span className={styles.bar}>
+                      <span
+                        className={styles.percentage}
+                        style={{
+                          flexBasis: `${percentageOfVotes}%`,
+                        }}
+                      />
+                    </span>
+                    <span className={styles.label}>{percentageOfVotes}%</span>
+                    <p className={styles.votes}>
+                      {numberOfVotes} of {totalNumberOfVotes} votes.
+                    </p>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </Card.Body>
     );
   };
 
   render() {
-    const { avatarURL, name } = this.props.user;
+    const { name } = this.props.user;
     const { authedUserVoted } = this.props.question;
     return (
-      <PageTemplate>
-        <div className="card">
-          <div className="card__header">
-            <h3>{name}</h3>
-          </div>
-          <div className={styles.container}>
-            <div className={styles.avatar}>
-              <img src={avatarURL} alt={name} />
-            </div>
-            <div className={styles.details}>
-              {authedUserVoted ? this.renderResults() : this.renderQuestion()}
-            </div>
-          </div>
-        </div>
+      <PageTemplate alignCentre>
+        <Card header={name}>
+          {authedUserVoted ? this.renderResults() : this.renderQuestion()}
+        </Card>
       </PageTemplate>
     );
   }
@@ -174,6 +195,7 @@ const mapStateToProps = ({ questions, users, authedUser }, props) => {
     user: {
       name: userAuthor.name,
       avatarURL: userAuthor.avatarURL,
+      backgroundColor: userAuthor.backgroundColor,
     },
     authedUser,
   };

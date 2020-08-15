@@ -1,22 +1,7 @@
-.avatar {
-  margin: 0;
-  width: 32px;
-  height: 32px;
-  border-radius: 100px;
-  overflow: hidden;
-  background-color: aqua;
-}
-
-.image {
-  width: 100%;
-  height: auto;
-}
-
 .name {
   flex: 1;
   padding-left: 8px;
 }
-
 
 /* Style for the SelectSearch */
 .container {
@@ -32,10 +17,10 @@
   content: "";
   display: inline-block;
   position: absolute;
-  top: calc(50% - 9px);
-  right: 19px;
-  width: 11px;
-  height: 11px;
+  top: calc(50% - 6px);
+  right: 16px;
+  width: 8px;
+  height: 8px;
   transform: rotate(45deg);
   border-right: 1px solid #000;
   border-bottom: 1px solid #000;
@@ -44,24 +29,24 @@
 
 .input {
   display: block;
-  height: 36px;
   width: 100%;
-  padding: 0 16px;
-  background: #fff;
-  border: 1px solid transparent;
-  box-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.15);
-  border-radius: 3px;
-  outline: none;
-  font-family: "Noto Sans", sans-serif;
   font-size: 14px;
-  text-align: left;
-  text-overflow: ellipsis;
-  line-height: 36px;
-  -webkit-appearance: none;
+  line-height: 1.5;
+  color: #1b2830;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #c5c9ce;
+  border-radius: 4px;
+  padding: 4px 10px;
+  transition: border-color ease-in-out 0.15s;
+  background-clip: padding-box;
 }
 
-.input:hover {
-  border-color: #2fcc8b;
+.input:focus {
+  outline: 0;
+  border: 2px solid royalBlue;
+  border-width: 2px;
+  padding: 3px 9px;
 }
 
 .select {
@@ -70,7 +55,7 @@
 
   position: absolute;
   z-index: 2;
-  top: 44px;
+  top: 36px;
   right: 0;
   left: 0;
   border-radius: 3px;
@@ -93,35 +78,14 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  padding: 12px;
+  padding: 6px 12px;
 }
 
 .option:not(.is-selected):hover {
-  background: rgba(47, 204, 139, 0.1);
-}
-
-.group {
-}
-
-.group-header {
+  background: mediumseagreen;
+  color: #fff;
 }
 
 .is-selected {
-  background: #2fcc8b;
-  color: #fff;
-}
-
-.is-selected:hover {
-  background: #2eb378;
-  color: #fff;
-}
-
-.is-highlighted {
-  background: rgba(47, 204, 139, 0.1);
-}
-
-.is-loading {
-}
-
-.has-focus {
+  background: rgba(60, 179, 113, 0.15);
 }

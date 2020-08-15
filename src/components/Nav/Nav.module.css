@@ -2,7 +2,7 @@
 .nav {
   background-color: #fff;
   /* margin-bottom: 32px; */
-  border-bottom: 1px solid hotpink;
+  border-bottom: 1px solid lightsteelblue;
   width: 100%;
 }
 
@@ -40,7 +40,7 @@
 
 .active,
 .link:hover {
-  border-bottom-color: hotpink;
+  border-bottom-color: royalblue;
 }
 
 .active {

@@ -5,6 +5,8 @@ import styles from "./SignIn.module.css";
 import SelectSearch from "react-select-search";
 import { setAuthedUser } from "../../actions/authedUser";
 import PageTemplate from "../PageTemplate/PageTemplate";
+import Avatar from "../Avatar/Avatar";
+import Card from "../Card/Card";
 
 // TODO:
 // Setup routing
@@ -30,18 +32,15 @@ class SignIn extends React.Component {
   };
 
   renderFriend = (props, option, snapshot, className) => {
-    const { image, name } = option;
+    const { image, name, backgroundColor } = option;
     return (
       <button {...props} className={className} type="button">
-        <span className={styles.avatar}>
-          <img
-            alt={name}
-            width="32"
-            height="32"
-            src={image}
-            className={styles.image}
-          />
-        </span>
+        <Avatar
+          name={name}
+          size="32px"
+          image={image}
+          backgroundColor={backgroundColor}
+        />
         <span className={styles.name}>{name}</span>
       </button>
     );
@@ -57,28 +56,27 @@ class SignIn extends React.Component {
   render() {
     const { userOptions } = this.props;
     return (
-      <PageTemplate pageTitle={this.pageTitle}>
-        <form className="card" onSubmit={this.handleSubmit}>
-          <div className="card__header">
-            <strong>Sign in with one of the these users.</strong>
-          </div>
-          <SelectSearch
-            options={userOptions}
-            renderOption={this.renderFriend}
-            name="Sign in user"
-            placeholder="Select user"
-            className={(key) => styles[key]}
-            onChange={this.handleChange}
-          />
-          <div className="card__footer">
-            <button
-              type="submit"
-              className="button"
-              disabled={this.state.value === "" ? true : false}
-            >
-              Sign in
-            </button>
-          </div>
+      <PageTemplate pageTitle={this.pageTitle} alignCentre>
+        <form onSubmit={this.handleSubmit}>
+          <Card header="Sign in with one of the these users.">
+            <SelectSearch
+              options={userOptions}
+              renderOption={this.renderFriend}
+              name="Sign in user"
+              placeholder="Select user"
+              className={(key) => styles[key]}
+              onChange={this.handleChange}
+            />
+            <Card.Footer>
+              <button
+                type="submit"
+                className="button"
+                disabled={this.state.value === "" ? true : false}
+              >
+                Sign in
+              </button>
+            </Card.Footer>
+          </Card>
         </form>
       </PageTemplate>
     );
@@ -88,10 +86,11 @@ class SignIn extends React.Component {
 const mapStateToProps = ({ users }) => {
   // Create array of users to send to SelectSearch component
   const userOptions = Object.keys(users).map((user) => {
-    const { name, avatarURL, id } = users[user];
+    const { name, avatarURL, id, backgroundColor } = users[user];
     return {
       name,
       image: avatarURL,
+      backgroundColor,
       value: id,
     };
   });

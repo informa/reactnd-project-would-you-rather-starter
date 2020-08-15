@@ -1,0 +1,41 @@
+/* Card */
+.card {
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 5px 0 rgba(46, 62, 79, 0.3);
+  background: white;
+}
+
+.header {
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e8eaec;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header > * {
+  margin: 0;
+}
+
+.footer {
+  margin-top: 32px;
+  border-top: 1px solid #e8eaec;
+  padding-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.footer > *:not(:first-child) {
+  margin-left: 12px;
+}
+
+
+.container {
+  display: flex;
+}
+
+.container > *:not(:first-child){
+  padding-left: 16px;
+}

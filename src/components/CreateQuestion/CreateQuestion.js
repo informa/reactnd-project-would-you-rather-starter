@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import styles from "./CreateQuestion.module.css";
 import PageTemplate from "../PageTemplate/PageTemplate";
 import { handleNewQuestion } from "../../actions/shared";
+import Card from "../Card/Card";
 
 // TODO:
 // Not sure if option object is messy {}
@@ -11,7 +12,9 @@ import { handleNewQuestion } from "../../actions/shared";
 const Input = ({ label, value, id, onChange }) => {
   return (
     <div className="field">
-      <label htmlFor={id}>{label}</label>
+      <label className="label" htmlFor={id}>
+        {label}
+      </label>
       <input
         className="input"
         type="text"
@@ -84,36 +87,41 @@ class CreateQuestion extends React.Component {
     const fieldsHaveValues = allFieldValues.every(this.hasValue);
 
     return (
-      <PageTemplate pageTitle="Create Question">
-        <form className="card" onSubmit={this.handleSubmit}>
-          <div className="card__header">
-            <h3>Would you rather ...</h3>
-          </div>
-          <Input
-            id="optionOne"
-            label="Enter text for option one"
-            value={options.optionOne.value}
-            onChange={this.handleOnChange}
-          />
-          <h4>Or</h4>
-          <Input
-            id="optionTwo"
-            label="Enter text for option two"
-            value={options.optionTwo.value}
-            onChange={this.handleOnChange}
-          />
-          <div className="card__footer">
-            <button className="button button--secondary" type="button">
-              Cancel
-            </button>
-            <button
-              className="button"
-              type="submit"
-              disabled={!fieldsHaveValues}
-            >
-              Submit
-            </button>
-          </div>
+      <PageTemplate pageTitle="Create Question" alignCentre>
+        <form onSubmit={this.handleSubmit}>
+          <Card header="Would you rather ...">
+            <Input
+              id="optionOne"
+              label="Enter text for option one"
+              value={options.optionOne.value}
+              onChange={this.handleOnChange}
+            />
+            <h4>Or</h4>
+            <Input
+              id="optionTwo"
+              label="Enter text for option two"
+              value={options.optionTwo.value}
+              onChange={this.handleOnChange}
+            />
+            <Card.Footer>
+              <button
+                className="button button--secondary"
+                type="button"
+                onClick={() => {
+                  this.setState({ toHome: true });
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                className="button"
+                type="submit"
+                disabled={!fieldsHaveValues}
+              >
+                Submit
+              </button>
+            </Card.Footer>
+          </Card>
         </form>
       </PageTemplate>
     );

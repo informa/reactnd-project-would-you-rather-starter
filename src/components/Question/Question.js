@@ -3,12 +3,11 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import styles from "./Question.module.css";
 import { formatDate } from "../../utils/helper";
+import Avatar from "../Avatar/Avatar";
+import Card from "../Card/Card";
 
 // TODO:
 // refactor map state to prop into helper function like formatQuestion in Data.js ?
-// styles:
-//  date time?,
-//  show 15 chars of question one ...become a superh...?
 
 class Question extends React.Component {
   handleClick = () => {
@@ -17,32 +16,38 @@ class Question extends React.Component {
     history.push(`/question/${id}`);
   };
   render() {
-    const { avatarURL, name } = this.props.user;
-    const { optionOne, optionTwo, dateTime } = this.props.question;
+    const { avatarURL, name, backgroundColor } = this.props.user;
+    const { optionOne, dateTime } = this.props.question;
+
+    const optionOneText = `...${optionOne.substring(0, 15)}...`;
+
+    const avatar = (
+      <Avatar
+        name={name}
+        size="100px"
+        image={avatarURL}
+        backgroundColor={backgroundColor}
+      />
+    );
+
     return (
-      <div className="card">
-        <div className="card__header">
+      <Card>
+        <Card.Header>
           <h3>{name}</h3>
-        </div>
-        <div className={styles.container}>
-          <div className={styles.avatar}>
-            <img src={avatarURL} alt={name} />
-          </div>
+          <span className={styles.label}>{dateTime}</span>
+        </Card.Header>
+        <Card.Body avatar={avatar}>
           <div className={styles.details}>
             <h3>Would you rather</h3>
-            <p>{dateTime}</p>
-            <ul>
-              <li>{optionOne}</li>
-              <li>{optionTwo}</li>
-            </ul>
+            <p>{optionOneText}</p>
           </div>
-        </div>
-        <div className="card__footer">
+        </Card.Body>
+        <Card.Footer>
           <button className="button" onClick={this.handleClick}>
             View poll
           </button>
-        </div>
-      </div>
+        </Card.Footer>
+      </Card>
     );
   }
 }
@@ -55,12 +60,12 @@ const mapStateToProps = ({ questions, users }, { id }) => {
   return {
     question: {
       optionOne: question.optionOne.text,
-      optionTwo: question.optionTwo.text,
       dateTime: formatDate(question.timestamp),
     },
     user: {
       name: userAuthor.name,
       avatarURL: userAuthor.avatarURL,
+      backgroundColor: userAuthor.backgroundColor,
     },
   };
 };

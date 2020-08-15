@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./UserStats.module.css";
+import Avatar from "../Avatar/Avatar";
+import Card from "../Card/Card";
 
 // TODO:
 // styles:
@@ -9,19 +11,24 @@ class UserStats extends React.Component {
     const {
       avatarURL,
       name,
+      backgroundColor,
       createdQuestions,
       answeredQuestions,
       score,
     } = this.props.user;
+
+    const avatar = (
+      <Avatar
+        name={name}
+        size="100px"
+        image={avatarURL}
+        backgroundColor={backgroundColor}
+      />
+    );
+    
     return (
-      <div className="card">
-        <div className="card__header">
-          <h3>{name}</h3>
-        </div>
-        <div className={styles.container}>
-          <div className={styles.avatar}>
-            <img src={avatarURL} alt={name} />
-          </div>
+      <Card header={name}>
+        <Card.Body avatar={avatar}>
           <div className={styles.details}>
             <dl className={styles.stats}>
               <dt>Created questions</dt>
@@ -34,8 +41,8 @@ class UserStats extends React.Component {
             <dt>Score</dt>
             <dd>{score}</dd>
           </dl>
-        </div>
-      </div>
+        </Card.Body>
+      </Card>
     );
   }
 }

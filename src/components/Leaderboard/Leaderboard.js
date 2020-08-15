@@ -34,6 +34,7 @@ const mapStateToProps = ({ users }) => {
       id,
       name: user.name,
       avatarURL: user.avatarURL,
+      backgroundColor: user.backgroundColor,
       createdQuestions,
       answeredQuestions,
       score,
