@@ -5,6 +5,7 @@ import styles from "./Question.module.css";
 import { formatDate } from "../../utils/helper";
 import Avatar from "../Avatar/Avatar";
 import Card from "../Card/Card";
+import { formatAvatarFromQuestion } from "../../utils/helper";
 
 // TODO:
 // refactor map state to prop into helper function like formatQuestion in Data.js ?
@@ -54,19 +55,13 @@ class Question extends React.Component {
 
 const mapStateToProps = ({ questions, users }, { id }) => {
   const question = questions[id];
-  const author = question.author;
-  const userAuthor = users[author];
 
   return {
     question: {
       optionOne: question.optionOne.text,
       dateTime: formatDate(question.timestamp),
     },
-    user: {
-      name: userAuthor.name,
-      avatarURL: userAuthor.avatarURL,
-      backgroundColor: userAuthor.backgroundColor,
-    },
+    user: formatAvatarFromQuestion({ id, questions, users }),
   };
 };
 

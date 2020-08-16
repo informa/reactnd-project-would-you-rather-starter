@@ -34,7 +34,7 @@ class App extends React.Component {
                 <>
                   <Route path="/" exact component={QuestionList} />
                   <Route path="/question/:id" component={QuestionDetail} />
-                  <Route path="/new" component={CreateQuestion} />
+                  <Route path="/add" component={CreateQuestion} />
                   <Route path="/leaderboard" component={Leaderboard} />
                   <Route path="/signin" component={SignIn} />
                 </>

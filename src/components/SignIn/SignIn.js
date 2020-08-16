@@ -8,10 +8,6 @@ import PageTemplate from "../PageTemplate/PageTemplate";
 import Avatar from "../Avatar/Avatar";
 import Card from "../Card/Card";
 
-// TODO:
-// Setup routing
-// Styling page cleanup
-
 class SignIn extends React.Component {
   state = {
     value: "",
@@ -25,7 +21,7 @@ class SignIn extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { id, history } = this.props;
+    const { history } = this.props;
 
     this.props.dispatch(setAuthedUser(this.state.value));
     history.push(`/`);
@@ -55,10 +51,21 @@ class SignIn extends React.Component {
 
   render() {
     const { userOptions } = this.props;
+
+    const footer = (
+      <button
+        type="submit"
+        className="button"
+        disabled={this.state.value === "" ? true : false}
+      >
+        Sign in
+      </button>
+    );
+
     return (
       <PageTemplate pageTitle={this.pageTitle} alignCentre>
         <form onSubmit={this.handleSubmit}>
-          <Card header="Sign in with one of the these users.">
+          <Card header="Sign in with one of the these users." footer={footer}>
             <SelectSearch
               options={userOptions}
               renderOption={this.renderFriend}
@@ -67,15 +74,6 @@ class SignIn extends React.Component {
               className={(key) => styles[key]}
               onChange={this.handleChange}
             />
-            <Card.Footer>
-              <button
-                type="submit"
-                className="button"
-                disabled={this.state.value === "" ? true : false}
-              >
-                Sign in
-              </button>
-            </Card.Footer>
           </Card>
         </form>
       </PageTemplate>

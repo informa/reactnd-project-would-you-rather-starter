@@ -27,7 +27,7 @@ let users = {
     id: "johndoe",
     name: "John Doe",
     avatarURL: "/assets/images/avatar-3.png",
-    backgroundColor: "aqua",
+    backgroundColor: "tomato",
     answers: {
       xj352vofupe1dqz9emx13r: "optionOne",
       vthrdm985a262al8qx3do: "optionTwo",

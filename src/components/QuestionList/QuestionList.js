@@ -4,10 +4,11 @@ import Question from "../Question/Question";
 import styles from "./QuestionList.module.css";
 import PageTemplate from "../PageTemplate/PageTemplate";
 import Card from "../Card/Card";
+import { withRouter } from "react-router-dom";
+import Tabs from "../Tabs/Tabs";
 
 // TODO:
 // refactor sorting function as it is used twice ?
-// style the tabs
 
 class QuestionList extends React.Component {
   state = {
@@ -24,41 +25,23 @@ class QuestionList extends React.Component {
     }
   };
 
+  handleNoUnanswered = () => {
+    this.props.history.push(`/add`);
+  };
+
   render() {
+    const { showUnanswered } = this.state;
     return (
       <PageTemplate pageTitle="Would You Rather?">
-        <ul className={styles.tabs}>
-          <li className={styles.tabitem}>
-            <a
-              name="answered questions"
-              className={
-                !this.state.showUnanswered
-                  ? `${styles.active} ${styles.tablink}`
-                  : styles.tablink
-              }
-              onClick={this.handleClick}
-              href="answered-questions"
-            >
-              Answered Questions
-            </a>
-          </li>
-          <li className={styles.tabitem}>
-            <a
-              name="unanswered questions"
-              className={
-                this.state.showUnanswered
-                  ? `${styles.active} ${styles.tablink}`
-                  : styles.tablink
-              }
-              onClick={this.handleClick}
-              href="unanswered-questions"
-            >
-              Unanswered Questions
-            </a>
-          </li>
-        </ul>
+        <Tabs
+          tabs={[
+            { label: "Unanswered Questions", active: showUnanswered },
+            { label: "Answered Questions", active: !showUnanswered },
+          ]}
+          onClick={this.handleClick}
+        />
 
-        {this.state.showUnanswered && (
+        {showUnanswered && (
           <ul className={styles.list}>
             {this.props.unanswered.length > 0 ? (
               this.props.unanswered.map((id) => (
@@ -68,24 +51,28 @@ class QuestionList extends React.Component {
               ))
             ) : (
               <li>
-                <Card header="Awesome...">
-                  <p>
-                    you have ansered all the question, why not create a new one?
-                  </p>
-                  <Card.Footer>
+                <Card
+                  header="Awesome..."
+                  footer={
                     <button
                       className="button"
+                      onClick={this.handleNoUnanswered}
                     >
                       Create new Question
                     </button>
-                  </Card.Footer>
+                  }
+                >
+                  <p>
+                    you have answered all the questions, why not create a new
+                    one?
+                  </p>
                 </Card>
               </li>
             )}
           </ul>
         )}
 
-        {!this.state.showUnanswered && (
+        {!showUnanswered && (
           <ul className={styles.list}>
             {this.props.answered.map((id) => (
               <li className={styles.item} key={id}>
@@ -117,4 +104,4 @@ const mapStateToProps = ({ questions, users, authedUser }) => {
   };
 };
 
-export default connect(mapStateToProps)(QuestionList);
+export default withRouter(connect(mapStateToProps)(QuestionList));

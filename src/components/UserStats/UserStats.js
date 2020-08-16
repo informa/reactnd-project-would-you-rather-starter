@@ -25,23 +25,21 @@ class UserStats extends React.Component {
         backgroundColor={backgroundColor}
       />
     );
-    
+
     return (
-      <Card header={name}>
-        <Card.Body avatar={avatar}>
-          <div className={styles.details}>
-            <dl className={styles.stats}>
-              <dt>Created questions</dt>
-              <dd>{createdQuestions}</dd>
-              <dt>Answered questions</dt>
-              <dd>{answeredQuestions}</dd>
-            </dl>
-          </div>
-          <dl className={styles.score}>
-            <dt>Score</dt>
-            <dd>{score}</dd>
+      <Card header={name} avatar={avatar}>
+        <div className={styles.details}>
+          <dl className={styles.stats}>
+            <dt>Created questions</dt>
+            <dd>{createdQuestions}</dd>
+            <dt>Answered questions</dt>
+            <dd>{answeredQuestions}</dd>
           </dl>
-        </Card.Body>
+        </div>
+        <dl className={styles.score}>
+          <dt>Score</dt>
+          <dd>{score}</dd>
+        </dl>
       </Card>
     );
   }

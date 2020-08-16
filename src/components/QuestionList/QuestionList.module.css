@@ -7,32 +7,3 @@
 .item {
   margin-bottom: 16px;
 }
-
-.active {
-  color: royalblue;
-  border-bottom: 2px solid #e8eaec;
-  border-bottom-color: royalblue;
-}
-
-.tabs {
-  padding-left: 0;
-  list-style: none;
-  display: flex;
-  border-bottom: 2px solid #e8eaec;
-  border-bottom-color: #dcdfe1;
-}
-
-.tabitem {
-  position: relative;
-  display: block;
-  margin-bottom: -2px;
-}
-
-.tablink {
-  position: relative;
-  display: block;
-  padding: 8px 12px;
-  color: #1b2830;
-  line-height: 1;
-  text-decoration: none;
-}

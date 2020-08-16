@@ -4,8 +4,8 @@ import CardBody from "./CardBody";
 import CardFooter from "./CardFooter";
 import CardHeader from "./CardHeader";
 
-const Card = ({ children, header, body, footer }) => {
-  const content = body || <CardBody>{children}</CardBody>;
+const Card = ({ children, header, body, footer, avatar }) => {
+  const content = body || <CardBody avatar={avatar}>{children}</CardBody>;
 
   return (
     <div className={styles.card}>

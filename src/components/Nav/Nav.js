@@ -3,24 +3,23 @@ import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import styles from "./Nav.module.css";
 import { setAuthedUser } from "../../actions/authedUser";
+import Avatar from "../Avatar/Avatar";
 
 // TODO:
 // styles:
 
 class Nav extends React.Component {
   handleSignOut = () => {
+    console.log('balls')
     this.props.dispatch(setAuthedUser(null));
   };
 
   render() {
+    const { name, avatarURL, backgroundColor, authed } = this.props;
     return (
       <nav className={styles.nav}>
-        <div
-          className={`${styles.container} ${
-            !this.props.authed && styles["sign-in"]
-          }`}
-        >
-          {this.props.authed && (
+        <div className={`${styles.container} ${!authed && styles["sign-in"]}`}>
+          {authed && (
             <ul className={styles.list}>
               <li>
                 <NavLink
@@ -34,7 +33,8 @@ class Nav extends React.Component {
               </li>
               <li>
                 <NavLink
-                  to="/new"
+                  to="/add"
+                  exact
                   className={styles.link}
                   activeClassName={styles.active}
                 >
@@ -55,19 +55,17 @@ class Nav extends React.Component {
             </ul>
           )}
           <ul className={styles.list}>
-            {this.props.authed && (
+            {authed && (
               <li>
                 <span className={`${styles.user} ${styles.link}`}>
-                  <span className={styles.avatar}>
-                    <img
-                      className={styles.image}
-                      alt={this.props.name}
-                      src={this.props.avatarURL}
-                      title={this.props.name}
-                    />
-                  </span>
+                  <Avatar
+                    name={name}
+                    size="25px"
+                    image={avatarURL}
+                    backgroundColor={backgroundColor}
+                  />
                   <span className={styles.name}>
-                    <strong>Signed in as:</strong> {this.props.name}
+                    <strong>Signed in as:</strong> {name}
                   </span>
                 </span>
               </li>
@@ -78,9 +76,9 @@ class Nav extends React.Component {
                 exact
                 className={styles.link}
                 activeClassName={styles.active}
-                onClick={this.props.authed ? this.handleSignOut : undefined}
+                onClick={authed ? this.handleSignOut : undefined}
               >
-                {this.props.authed ? "Logout" : "Signin"}
+                {authed ? "Logout" : "Signin"}
               </NavLink>
             </li>
           </ul>
@@ -98,6 +96,7 @@ const mapStateToProps = ({ users, authedUser }) => {
       authed: true,
       name: user.name,
       avatarURL: user.avatarURL,
+      backgroundColor: user.backgroundColor,
     };
   }
 
