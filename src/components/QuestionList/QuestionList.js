@@ -7,9 +7,6 @@ import Card from "../Card/Card";
 import { withRouter } from "react-router-dom";
 import Tabs from "../Tabs/Tabs";
 
-// TODO:
-// refactor sorting function as it is used twice ?
-
 class QuestionList extends React.Component {
   state = {
     showUnanswered: true,

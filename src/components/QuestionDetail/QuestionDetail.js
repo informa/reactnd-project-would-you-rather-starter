@@ -1,17 +1,25 @@
 import React from "react";
 import { connect } from "react-redux";
-import styles from "./QuestionDetail.module.css";
+import { Redirect } from "react-router-dom";
 import PageTemplate from "../PageTemplate/PageTemplate";
 import UnansweredQuestion from "../UnansweredQuestion/UnansweredQuestion";
 import AnsweredQuestion from "../AnsweredQuestion/AnsweredQuestion";
 
-// TODO:
-// refactor map state to prop into helper function like formatQuestion in Data.js ?
-// styles
-
 class QuestionDetail extends React.Component {
   render() {
+    if (!this.props.question) {
+      return (
+        <Redirect
+          to={{
+            pathname: "/question-not-found",
+            state: { from: this.props.id },
+          }}
+        />
+      );
+    }
+
     const { authedUserVoted, id } = this.props.question;
+
     return (
       <PageTemplate alignCentre>
         {authedUserVoted ? (
@@ -27,6 +35,14 @@ class QuestionDetail extends React.Component {
 const mapStateToProps = ({ questions, authedUser }, props) => {
   const { id } = props.match.params;
   const question = questions[id];
+
+  if (!question) {
+    return {
+      id,
+      question: undefined,
+    };
+  }
+
   const authedUserVotedOptionOne = question.optionOne.votes.includes(
     authedUser
   );

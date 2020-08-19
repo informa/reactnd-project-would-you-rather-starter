@@ -1,13 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import styles from "./CreateQuestion.module.css";
 import PageTemplate from "../PageTemplate/PageTemplate";
 import { handleNewQuestion } from "../../actions/shared";
 import Card from "../Card/Card";
-
-// TODO:
-// Not sure if option object is messy {}
 
 const Input = ({ label, value, id, onChange }) => {
   return (

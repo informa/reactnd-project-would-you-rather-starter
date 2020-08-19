@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 import styles from "./SignIn.module.css";
 import SelectSearch from "react-select-search";
 import { setAuthedUser } from "../../actions/authedUser";
@@ -21,10 +20,12 @@ class SignIn extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { history } = this.props;
+    const { history, location } = this.props;
+    const previousLocation =
+      location.pathname === "/signin" ? "/" : location.pathname;
 
     this.props.dispatch(setAuthedUser(this.state.value));
-    history.push(`/`);
+    history.push(previousLocation);
   };
 
   renderFriend = (props, option, snapshot, className) => {
@@ -42,12 +43,22 @@ class SignIn extends React.Component {
     );
   };
 
-  pageTitle = (
-    <div>
-      <h1>Sign in</h1>
-      <p>You must signin to view the Would You Rather app.</p>
-    </div>
-  );
+  pageTitle = () => {
+    const { location } = this.props;
+    const msg =
+      location.pathname !== "/signin" ? (
+        <span>
+          page <strong>{location.pathname}</strong> of
+        </span>
+      ) : undefined;
+
+    return (
+      <div>
+        <h1>Sign in</h1>
+        <p>You must signin to view {msg} the Would You Rather app.</p>
+      </div>
+    );
+  };
 
   render() {
     const { userOptions } = this.props;
@@ -63,7 +74,7 @@ class SignIn extends React.Component {
     );
 
     return (
-      <PageTemplate pageTitle={this.pageTitle} alignCentre>
+      <PageTemplate pageTitle={this.pageTitle()} alignCentre>
         <form onSubmit={this.handleSubmit}>
           <Card header="Sign in with one of the these users." footer={footer}>
             <SelectSearch
@@ -82,7 +93,7 @@ class SignIn extends React.Component {
 }
 
 const mapStateToProps = ({ users }) => {
-  // Create array of users to send to SelectSearch component
+  // Array of users to send to SelectSearch component
   const userOptions = Object.keys(users).map((user) => {
     const { name, avatarURL, id, backgroundColor } = users[user];
     return {

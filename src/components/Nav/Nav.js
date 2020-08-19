@@ -5,12 +5,8 @@ import styles from "./Nav.module.css";
 import { setAuthedUser } from "../../actions/authedUser";
 import Avatar from "../Avatar/Avatar";
 
-// TODO:
-// styles:
-
 class Nav extends React.Component {
   handleSignOut = () => {
-    console.log('balls')
     this.props.dispatch(setAuthedUser(null));
   };
 
@@ -18,42 +14,40 @@ class Nav extends React.Component {
     const { name, avatarURL, backgroundColor, authed } = this.props;
     return (
       <nav className={styles.nav}>
-        <div className={`${styles.container} ${!authed && styles["sign-in"]}`}>
-          {authed && (
-            <ul className={styles.list}>
-              <li>
-                <NavLink
-                  to="/"
-                  className={styles.link}
-                  exact
-                  activeClassName={styles.active}
-                >
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/add"
-                  exact
-                  className={styles.link}
-                  activeClassName={styles.active}
-                >
-                  New Question
-                </NavLink>
-              </li>
+        <div className={styles.container}>
+          <ul className={styles.list}>
+            <li>
+              <NavLink
+                to="/"
+                className={styles.link}
+                exact
+                activeClassName={styles.active}
+              >
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/add"
+                exact
+                className={styles.link}
+                activeClassName={styles.active}
+              >
+                New Question
+              </NavLink>
+            </li>
 
-              <li>
-                <NavLink
-                  to="/leaderboard"
-                  exact
-                  className={styles.link}
-                  activeClassName={styles.active}
-                >
-                  Leaderboard
-                </NavLink>
-              </li>
-            </ul>
-          )}
+            <li>
+              <NavLink
+                to="/leaderboard"
+                exact
+                className={styles.link}
+                activeClassName={styles.active}
+              >
+                Leaderboard
+              </NavLink>
+            </li>
+          </ul>
           <ul className={styles.list}>
             {authed && (
               <li>

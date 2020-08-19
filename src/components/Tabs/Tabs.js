@@ -5,7 +5,7 @@ const Tabs = ({ tabs, onClick }) => {
   return (
     <ul className={styles.tabs}>
       {tabs.map((tab) => (
-        <li className={styles.tabitem}>
+        <li key={tab.label} className={styles.tabitem}>
           <a
             name={tab.label}
             className={
