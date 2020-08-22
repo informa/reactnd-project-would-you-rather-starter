@@ -23,7 +23,7 @@ class AnsweredQuestion extends React.Component {
       <Card header={name} avatar={avatar}>
         <div className={styles.details}>
           <h3>Results</h3>
-          <ul class={styles.results}>
+          <ul className={styles.results}>
             {Object.keys(options).map((option) => {
               const {
                 numberOfVotes,
