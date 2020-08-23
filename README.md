@@ -46,7 +46,7 @@ The data is not persistent therefore refreshing the browser will set the data to
 
 **I would like to...**
 
-- Spend more time around unit testing various part of the app, including getting the data, testing connected components.
+- Spend more time around unit testing various parts of the app, including getting the data, testing connected components.
 - Get auth and create user working
 - Persist data when app refreshed
 
