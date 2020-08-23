@@ -57,4 +57,4 @@ The data is not persistent therefore refreshing the browser will set the data to
    - [Hierarchy of Components](/Documents/planning.md#hierarchy-of-components-for-each-view)
    - [What Events Happen in the App](/Documents/planning.md#what-events-happen-in-the-app)
    - [What Data Lives in the Store](/Documents/planning.md#what-data-lives-in-the-store)
-2. [Data methods](/Documents/data-methods)
+2. [Data methods](/Documents/data-methods.md)
