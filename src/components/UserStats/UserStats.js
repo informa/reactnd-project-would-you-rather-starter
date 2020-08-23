@@ -3,9 +3,6 @@ import styles from "./UserStats.module.css";
 import Avatar from "../Avatar/Avatar";
 import Card from "../Card/Card";
 
-// TODO:
-// styles:
-
 class UserStats extends React.Component {
   render() {
     const {

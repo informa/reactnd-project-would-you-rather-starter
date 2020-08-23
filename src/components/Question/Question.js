@@ -7,9 +7,6 @@ import Avatar from "../Avatar/Avatar";
 import Card from "../Card/Card";
 import { formatAvatarFromQuestion } from "../../utils/helper";
 
-// TODO:
-// refactor map state to prop into helper function like formatQuestion in Data.js ?
-
 class Question extends React.Component {
   handleClick = () => {
     const { id, history } = this.props;

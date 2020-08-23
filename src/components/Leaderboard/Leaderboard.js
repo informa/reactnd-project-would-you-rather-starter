@@ -4,9 +4,6 @@ import UserStats from "../UserStats/UserStats";
 import styles from "./Leaderboard.module.css";
 import PageTemplate from "../PageTemplate/PageTemplate";
 
-// TODO:
-// style the tabs
-
 class Leaderboard extends React.Component {
   render() {
     return (
