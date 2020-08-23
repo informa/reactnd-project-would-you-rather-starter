@@ -11,7 +11,7 @@ class Leaderboard extends React.Component {
         <ul className={styles.list}>
           {this.props.usersWithScores.map((user) => (
             <li className={styles.item} key={user.id}>
-              <UserStats user={user} />
+              <UserStats {...user} />
             </li>
           ))}
         </ul>

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./PageTemplate.module.css";
 
 const PageTemplate = ({ children, pageTitle, alignCentre }) => {
@@ -15,6 +16,17 @@ const PageTemplate = ({ children, pageTitle, alignCentre }) => {
       <div className={styles.body}>{children}</div>
     </div>
   );
+};
+
+PageTemplate.propTypes = {
+  children: PropTypes.node.isRequired,
+  pageTitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  alignCentre: PropTypes.bool,
+};
+
+PageTemplate.defaultProps = {
+  alignCentre: false,
+  pageTitle: undefined,
 };
 
 export default PageTemplate;

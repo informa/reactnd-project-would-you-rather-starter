@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./Tabs.module.css";
 
 const Tabs = ({ tabs, onClick }) => {
@@ -20,6 +21,16 @@ const Tabs = ({ tabs, onClick }) => {
       ))}
     </ul>
   );
+};
+
+Tabs.propTypes = {
+  tabs: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      active: PropTypes.bool,
+    })
+  ).isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default Tabs;

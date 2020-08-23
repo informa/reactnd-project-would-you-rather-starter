@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./Avatar.module.css";
 
 const Avatar = ({ size, image, backgroundColor, name }) => {
@@ -16,6 +17,13 @@ const Avatar = ({ size, image, backgroundColor, name }) => {
       />
     </span>
   );
+};
+
+Avatar.propTypes = {
+  size: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  backgroundColor: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 export default Avatar;
